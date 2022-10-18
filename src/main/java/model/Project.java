@@ -2,6 +2,11 @@ package model;
 
 import java.util.Date;
 
+/**
+ * @author Lucas Silva Arruda Chagas
+ * class model Project
+ */
+
 public class Project {
 
     private int id;
@@ -21,7 +26,6 @@ public class Project {
     public Project() {
         this.createdAt = new Date();
     }
-
     //getters and setters
     public int getId() {
         return id;
@@ -53,7 +57,7 @@ public class Project {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-
+    //to string
     @Override
     public String toString() {
         return "Project{" +
