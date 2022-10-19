@@ -61,6 +61,30 @@ public class ProjectDAO {
         }
 
     }
+    public static void update(Project project){
+        String SQL= "UPDATE projects SET name = ?, description = ?, updatedAt = ?" +
+                "WHERE id = ?";
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try{
+            connection = ConnectionFactory.getConnection();
+            statement = connection.prepareStatement(SQL);
+
+            statement.setString(1, project.getName());
+            statement.setString(2, project.getDescription());
+            statement.setDate(3, new Date(project.getUpdatedAt().getTime()));
+
+            statement.setInt(4, project.getId());
+
+            statement.execute();
+        }catch (Exception ex){
+            throw new RuntimeException("Error to updated project", ex);
+        }finally {
+            ConnectionFactory.closeConnection(connection, statement);
+        }
+    }
     public static List<Project> getAll(){
 
         String SQL= "SELECT * FROM projects";
@@ -91,29 +115,5 @@ public class ProjectDAO {
             ConnectionFactory.closeConnection(connection, statement, result);
         }
         return projects;
-    }
-    public static void update(Project project){
-        String SQL= "UPDATE projects SET name = ?, description = ?, updatedAt = ?" +
-                "WHERE id = ?";
-
-        Connection connection = null;
-        PreparedStatement statement = null;
-
-        try{
-            connection = ConnectionFactory.getConnection();
-            statement = connection.prepareStatement(SQL);
-
-            statement.setString(1, project.getName());
-            statement.setString(2, project.getDescription());
-            statement.setDate(3, new Date(project.getUpdatedAt().getTime()));
-
-            statement.setInt(4, project.getId());
-
-            statement.execute();
-        }catch (Exception ex){
-            throw new RuntimeException("Error to updated project", ex);
-        }finally {
-            ConnectionFactory.closeConnection(connection, statement);
-        }
     }
 }
