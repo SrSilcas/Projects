@@ -92,8 +92,8 @@ public class ProjectDAO {
         }
         return projects;
     }
-    public static void updatedTask(Project project){
-        String SQL= "UPDATED projects SET name = ?, description = ?, updatedAt = ?" +
+    public static void update(Project project){
+        String SQL= "UPDATE projects SET name = ?, description = ?, updatedAt = ?" +
                 "WHERE id = ?";
 
         Connection connection = null;

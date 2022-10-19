@@ -25,6 +25,7 @@ public class Project {
     }
     public Project() {
         this.createdAt = new Date();
+        this.updatedAt = new Date();
     }
     //getters and setters
     public int getId() {

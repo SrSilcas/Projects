@@ -32,6 +32,7 @@ public class Task {
     }
     public Task() {
         this.createdAt = new Date();
+        this.createdAt = new Date();
     }
     //getters and setters
     public int getId() {

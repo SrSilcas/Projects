@@ -62,8 +62,8 @@ public class TaskDAO {
         }
 
     }
-    public static void updated(Task task){
-        String SQL= "UPDATED tasks SET name = ?, description = ?, notes = ?, status = ?, deadline = ?, updatedAt = ?" +
+    public static void update(Task task){
+        String SQL= "UPDATE tasks SET name = ?, description = ?, notes = ?, status = ?, deadline = ?, updatedAt = ?" +
                 "WHERE id = ?";
 
         Connection connection = null;
