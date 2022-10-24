@@ -10,7 +10,7 @@ import model.Project;
 
 /**
  *
- * @author User
+ * @author Lucas Silva Arruda Chagas
  */
 public class ProjectAddDialogScreen extends javax.swing.JDialog {
     
