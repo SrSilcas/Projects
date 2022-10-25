@@ -5,6 +5,7 @@
 package view;
 
 import controller.ProjectDAO;
+import controller.TaskDAO;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
@@ -13,6 +14,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import model.Project;
 import model.Task;
+import util.TaskTableModel;
 
 /**
  *
@@ -20,8 +22,8 @@ import model.Task;
  */
 public class MainScrenn extends javax.swing.JFrame {
     
-    DefaultListModel projectModel;
-    DefaultListModel<Task> taskModel;
+    DefaultListModel projectsModel;
+    TaskTableModel taskModel;
     
     public MainScrenn() {
         initComponents();
@@ -42,7 +44,6 @@ public class MainScrenn extends javax.swing.JFrame {
         NoTasksJLabelIcon = new javax.swing.JLabel();
         NoTasksJLabelTitle = new javax.swing.JLabel();
         NoTasksJLabelSubTitle = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
         JPanelToolBar = new javax.swing.JPanel();
         ToolBarJLabelTitle = new javax.swing.JLabel();
         ToolBarJLabelSubTitle = new javax.swing.JLabel();
@@ -157,7 +158,7 @@ public class MainScrenn extends javax.swing.JFrame {
             .addGroup(JPanelProjectsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ProjectsJLabelProjects, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addComponent(ProjectsJLabelAdd)
                 .addContainerGap())
         );
@@ -268,6 +269,7 @@ public class MainScrenn extends javax.swing.JFrame {
         TasksListJTableTasks.setGridColor(java.awt.Color.white);
         TasksListJTableTasks.setRowHeight(50);
         TasksListJTableTasks.setSelectionBackground(new java.awt.Color(0, 153, 102));
+        TasksListJTableTasks.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         TasksListJTableTasks.setShowVerticalLines(false);
         jScrollPane1.setViewportView(TasksListJTableTasks);
 
@@ -275,7 +277,7 @@ public class MainScrenn extends javax.swing.JFrame {
         JPanelTasksList.setLayout(JPanelTasksListLayout);
         JPanelTasksListLayout.setHorizontalGroup(
             JPanelTasksListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
         );
         JPanelTasksListLayout.setVerticalGroup(
             JPanelTasksListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,12 +334,11 @@ public class MainScrenn extends javax.swing.JFrame {
         // TODO add your handling code here:
         TasksAddDialogScreen tasksAddDialogScreen = 
                 new TasksAddDialogScreen(this, rootPaneCheckingEnabled);
-        tasksAddDialogScreen.setProject(null);
+//        tasksAddDialogScreen.setProject(null);
         tasksAddDialogScreen.setVisible(true);
-        tasksAddDialogScreen.addWindowListener(new WindowAdapter(){
+        tasksAddDialogScreen.addWindowListener(new WindowAdapter() {
             public void windowClosed(WindowEvent e){
-//                loadTasks();
-            
+                loadTasks(3);         
             }
         });
     }//GEN-LAST:event_TasksJLabelAddMouseClicked
@@ -398,30 +399,36 @@ public class MainScrenn extends javax.swing.JFrame {
     private javax.swing.JLabel ToolBarJLabelTitle;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPaneProjectsList;
-    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
     public void decorateTableTasks(){
         //decor table TasksList
         TasksListJTableTasks.getTableHeader().setFont(new Font("Segoe Ui", Font.BOLD, 14));
-        TasksListJTableTasks.getTableHeader().setBackground(new Color(0,153,102));
+        TasksListJTableTasks.getTableHeader().setBackground(new Color(0,102,102));
         TasksListJTableTasks.getTableHeader().setForeground(new Color(255,255,255));
         //Created
         TasksListJTableTasks.setAutoCreateRowSorter(true);
     }
     public void initComponntsModel(){
-        projectModel = new DefaultListModel();
+        projectsModel = new DefaultListModel();
         loadProjects();
-   
+        
+        taskModel =  new TaskTableModel();
+        TasksListJTableTasks.setModel(taskModel);
+        loadTasks(3);
+    }
+    public void loadTasks(int idProject){
+        List<Task> tasks = TaskDAO.getByIdProject(idProject);
+        taskModel.setTasks(tasks);
     }
     public void loadProjects(){
         List<Project> projects = ProjectDAO.getAll();
-        projectModel.clear();
+        projectsModel.clear();
        
         for (int i = 0; i < projects.size(); i++) {
             Project project = projects.get(i);
-            projectModel.addElement(project);
+            projectsModel.addElement(project);
         }
-        JListProjects.setModel(projectModel);
+        JListProjects.setModel(projectsModel);
    
     }
 }
