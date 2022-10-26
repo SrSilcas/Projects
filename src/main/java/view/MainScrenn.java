@@ -40,10 +40,8 @@ public class MainScrenn extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        TasksListJPanelNoTasks = new javax.swing.JPanel();
-        NoTasksJLabelIcon = new javax.swing.JLabel();
-        NoTasksJLabelTitle = new javax.swing.JLabel();
-        NoTasksJLabelSubTitle = new javax.swing.JLabel();
+        jScrollPaneTaskList = new javax.swing.JScrollPane();
+        TasksListJTableTasks = new javax.swing.JTable();
         JPanelToolBar = new javax.swing.JPanel();
         ToolBarJLabelTitle = new javax.swing.JLabel();
         ToolBarJLabelSubTitle = new javax.swing.JLabel();
@@ -57,46 +55,50 @@ public class MainScrenn extends javax.swing.JFrame {
         jScrollPaneProjectsList = new javax.swing.JScrollPane();
         JListProjects = new javax.swing.JList<>();
         JPanelTasksList = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TasksListJTableTasks = new javax.swing.JTable();
+        TasksListJPanelNoTasks = new javax.swing.JPanel();
+        NoTasksJLabelIcon = new javax.swing.JLabel();
+        NoTasksJLabelTitle = new javax.swing.JLabel();
+        NoTasksJLabelSubTitle = new javax.swing.JLabel();
 
-        TasksListJPanelNoTasks.setBackground(java.awt.Color.white);
+        TasksListJTableTasks.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        TasksListJTableTasks.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nome", "Descrição", "Prazo", "Tarefa Concluida"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
 
-        NoTasksJLabelIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        NoTasksJLabelIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lists.png"))); // NOI18N
-        NoTasksJLabelIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
-        NoTasksJLabelTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        NoTasksJLabelTitle.setForeground(new java.awt.Color(0, 153, 102));
-        NoTasksJLabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        NoTasksJLabelTitle.setText("Nenhuma tarefa nesse projeto");
-
-        NoTasksJLabelSubTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        NoTasksJLabelSubTitle.setForeground(new java.awt.Color(0, 153, 102));
-        NoTasksJLabelSubTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        NoTasksJLabelSubTitle.setText("Clique no botão \"+\" para adcionar uma nova tarefa");
-
-        javax.swing.GroupLayout TasksListJPanelNoTasksLayout = new javax.swing.GroupLayout(TasksListJPanelNoTasks);
-        TasksListJPanelNoTasks.setLayout(TasksListJPanelNoTasksLayout);
-        TasksListJPanelNoTasksLayout.setHorizontalGroup(
-            TasksListJPanelNoTasksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(NoTasksJLabelSubTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-            .addComponent(NoTasksJLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(TasksListJPanelNoTasksLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(NoTasksJLabelIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        TasksListJPanelNoTasksLayout.setVerticalGroup(
-            TasksListJPanelNoTasksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TasksListJPanelNoTasksLayout.createSequentialGroup()
-                .addGap(167, 167, 167)
-                .addComponent(NoTasksJLabelIcon)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(NoTasksJLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(NoTasksJLabelSubTitle)
-                .addGap(130, 130, 130))
-        );
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TasksListJTableTasks.setGridColor(java.awt.Color.white);
+        TasksListJTableTasks.setRowHeight(50);
+        TasksListJTableTasks.setSelectionBackground(new java.awt.Color(0, 153, 102));
+        TasksListJTableTasks.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        TasksListJTableTasks.setShowVerticalLines(false);
+        TasksListJTableTasks.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TasksListJTableTasksMouseClicked(evt);
+            }
+        });
+        jScrollPaneTaskList.setViewportView(TasksListJTableTasks);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 800));
@@ -114,7 +116,7 @@ public class MainScrenn extends javax.swing.JFrame {
 
         ToolBarJLabelSubTitle.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         ToolBarJLabelSubTitle.setForeground(new java.awt.Color(255, 255, 255));
-        ToolBarJLabelSubTitle.setText(" Escreva tudo, não esqueça nada");
+        ToolBarJLabelSubTitle.setText(" Anote tudo, não esqueça nada");
 
         javax.swing.GroupLayout JPanelToolBarLayout = new javax.swing.GroupLayout(JPanelToolBar);
         JPanelToolBar.setLayout(JPanelToolBarLayout);
@@ -216,6 +218,11 @@ public class MainScrenn extends javax.swing.JFrame {
         JListProjects.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         JListProjects.setFixedCellHeight(50);
         JListProjects.setSelectionBackground(new java.awt.Color(0, 153, 102));
+        JListProjects.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JListProjectsMouseClicked(evt);
+            }
+        });
         jScrollPaneProjectsList.setViewportView(JListProjects);
 
         javax.swing.GroupLayout JPanelProjectsListLayout = new javax.swing.GroupLayout(JPanelProjectsList);
@@ -237,52 +244,47 @@ public class MainScrenn extends javax.swing.JFrame {
 
         JPanelTasksList.setBackground(java.awt.Color.white);
         JPanelTasksList.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        JPanelTasksList.setLayout(new java.awt.BorderLayout());
 
-        TasksListJTableTasks.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        TasksListJTableTasks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Nome", "Descrição", "Prazo", "Tarefa Concluida"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Boolean.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, true
-            };
+        TasksListJPanelNoTasks.setBackground(java.awt.Color.white);
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+        NoTasksJLabelIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NoTasksJLabelIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lists.png"))); // NOI18N
+        NoTasksJLabelIcon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TasksListJTableTasks.setGridColor(java.awt.Color.white);
-        TasksListJTableTasks.setRowHeight(50);
-        TasksListJTableTasks.setSelectionBackground(new java.awt.Color(0, 153, 102));
-        TasksListJTableTasks.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        TasksListJTableTasks.setShowVerticalLines(false);
-        jScrollPane1.setViewportView(TasksListJTableTasks);
+        NoTasksJLabelTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        NoTasksJLabelTitle.setForeground(new java.awt.Color(0, 153, 102));
+        NoTasksJLabelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NoTasksJLabelTitle.setText("Nenhuma tarefa nesse projeto");
 
-        javax.swing.GroupLayout JPanelTasksListLayout = new javax.swing.GroupLayout(JPanelTasksList);
-        JPanelTasksList.setLayout(JPanelTasksListLayout);
-        JPanelTasksListLayout.setHorizontalGroup(
-            JPanelTasksListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+        NoTasksJLabelSubTitle.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        NoTasksJLabelSubTitle.setForeground(new java.awt.Color(0, 153, 102));
+        NoTasksJLabelSubTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        NoTasksJLabelSubTitle.setText("Clique no botão \"+\" para adcionar uma nova tarefa");
+
+        javax.swing.GroupLayout TasksListJPanelNoTasksLayout = new javax.swing.GroupLayout(TasksListJPanelNoTasks);
+        TasksListJPanelNoTasks.setLayout(TasksListJPanelNoTasksLayout);
+        TasksListJPanelNoTasksLayout.setHorizontalGroup(
+            TasksListJPanelNoTasksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(NoTasksJLabelSubTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+            .addComponent(NoTasksJLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(TasksListJPanelNoTasksLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(NoTasksJLabelIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        JPanelTasksListLayout.setVerticalGroup(
-            JPanelTasksListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+        TasksListJPanelNoTasksLayout.setVerticalGroup(
+            TasksListJPanelNoTasksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TasksListJPanelNoTasksLayout.createSequentialGroup()
+                .addGap(167, 167, 167)
+                .addComponent(NoTasksJLabelIcon)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(NoTasksJLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(NoTasksJLabelSubTitle)
+                .addGap(130, 130, 130))
         );
+
+        JPanelTasksList.add(TasksListJPanelNoTasks, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -334,14 +336,46 @@ public class MainScrenn extends javax.swing.JFrame {
         // TODO add your handling code here:
         TasksAddDialogScreen tasksAddDialogScreen = 
                 new TasksAddDialogScreen(this, rootPaneCheckingEnabled);
-//        tasksAddDialogScreen.setProject(null);
+        int projectIndex = JListProjects.getSelectedIndex();
+        Project project = (Project) projectsModel.get(projectIndex);
+        tasksAddDialogScreen.setProject(project);
         tasksAddDialogScreen.setVisible(true);
         tasksAddDialogScreen.addWindowListener(new WindowAdapter() {
             public void windowClosed(WindowEvent e){
-                loadTasks(3);         
+                loadTasks(project.getId());         
             }
         });
     }//GEN-LAST:event_TasksJLabelAddMouseClicked
+
+    private void TasksListJTableTasksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TasksListJTableTasksMouseClicked
+        int rowIndex = TasksListJTableTasks.rowAtPoint(evt.getPoint());
+        int columnIndex = TasksListJTableTasks.columnAtPoint(evt.getPoint());
+        Task task = taskModel.getTasks().get(rowIndex);
+        switch (columnIndex) {
+            case 3:             
+                TaskDAO.update(task);
+            break;
+            case 4:
+                TaskDAO.update(task);
+            break;
+            case 5:
+                TaskDAO.removeById(task.getId());
+                taskModel.getTasks().remove(task);
+                int projectIndex = JListProjects.getSelectedIndex();
+                Project project = (Project) projectsModel.get(projectIndex);
+                loadTasks(project.getId());
+            break;
+
+            default:
+                throw new AssertionError();
+        }
+    }//GEN-LAST:event_TasksListJTableTasksMouseClicked
+
+    private void JListProjectsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JListProjectsMouseClicked
+        int projectIndex = JListProjects.getSelectedIndex();
+        Project project = (Project) projectsModel.get(projectIndex);
+        loadTasks(project.getId());
+    }//GEN-LAST:event_JListProjectsMouseClicked
 
     /**
      * @param args the command line arguments
@@ -397,8 +431,8 @@ public class MainScrenn extends javax.swing.JFrame {
     private javax.swing.JTable TasksListJTableTasks;
     private javax.swing.JLabel ToolBarJLabelSubTitle;
     private javax.swing.JLabel ToolBarJLabelTitle;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPaneProjectsList;
+    private javax.swing.JScrollPane jScrollPaneTaskList;
     // End of variables declaration//GEN-END:variables
     public void decorateTableTasks(){
         //decor table TasksList
@@ -410,15 +444,20 @@ public class MainScrenn extends javax.swing.JFrame {
     }
     public void initComponntsModel(){
         projectsModel = new DefaultListModel();
-        loadProjects();
-        
+        loadProjects();        
         taskModel =  new TaskTableModel();
         TasksListJTableTasks.setModel(taskModel);
-        loadTasks(3);
+               
+        if (!projectsModel.isEmpty()){
+            JListProjects.setSelectedIndex(0);
+            Project project = (Project) projectsModel.get(0);
+            loadTasks(project.getId());        
+        }
     }
     public void loadTasks(int idProject){
         List<Task> tasks = TaskDAO.getByIdProject(idProject);
         taskModel.setTasks(tasks);
+        showTableTasks(!tasks.isEmpty());
     }
     public void loadProjects(){
         List<Project> projects = ProjectDAO.getAll();
@@ -428,7 +467,29 @@ public class MainScrenn extends javax.swing.JFrame {
             Project project = projects.get(i);
             projectsModel.addElement(project);
         }
-        JListProjects.setModel(projectsModel);
-   
+        JListProjects.setModel(projectsModel);   
+    }
+    private void showTableTasks(boolean hasTasks){    
+        if(hasTasks){
+            //case exist tasks
+            if (TasksListJPanelNoTasks.isVisible()) {
+                TasksListJPanelNoTasks.setVisible(false);
+                JPanelTasksList.remove(TasksListJPanelNoTasks);    
+            }
+            JPanelTasksList.add(jScrollPaneTaskList);
+            jScrollPaneTaskList.setVisible(true);
+            jScrollPaneTaskList.setSize(JPanelTasksList.getWidth(),
+                    JPanelTasksList.getHeight());
+        }
+        else{
+            if(jScrollPaneTaskList.isVisible()){
+                jScrollPaneTaskList.setVisible(false);
+                JPanelTasksList.remove(jScrollPaneTaskList);                
+            }
+            JPanelTasksList.add(TasksListJPanelNoTasks);
+            TasksListJPanelNoTasks.setVisible(true);
+            TasksListJPanelNoTasks.setSize(JPanelTasksList.getWidth(),
+                    JPanelTasksList.getHeight());
+        }
     }
 }
