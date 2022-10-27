@@ -14,21 +14,23 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import model.Project;
 import model.Task;
+import util.DeadlineColumnCellRederer;
 import util.TaskTableModel;
 
 /**
  *
  * @author Lucas Silva Arruda Chagas
  */
-public class MainScrenn extends javax.swing.JFrame {
+public final class MainScrenn extends javax.swing.JFrame {
     
     DefaultListModel projectsModel;
     TaskTableModel taskModel;
     
     public MainScrenn() {
         initComponents();
-        decorateTableTasks();
+        
         initComponntsModel();
+//        decorateTableTasks();
     }
 
     /**
@@ -326,6 +328,7 @@ public class MainScrenn extends javax.swing.JFrame {
                 new ProjectAddDialogScreen(this, rootPaneCheckingEnabled);
         projectAddDialogScreen.setVisible(true);
         projectAddDialogScreen.addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosed(WindowEvent e){
                 loadProjects();
             }                
@@ -341,7 +344,10 @@ public class MainScrenn extends javax.swing.JFrame {
         tasksAddDialogScreen.setProject(project);
         tasksAddDialogScreen.setVisible(true);
         tasksAddDialogScreen.addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosed(WindowEvent e){
+                int projectIndex =  JListProjects.getSelectedIndex();
+                Project project =  (Project) projectsModel.get(projectIndex);
                 loadTasks(project.getId());         
             }
         });
@@ -439,6 +445,8 @@ public class MainScrenn extends javax.swing.JFrame {
         TasksListJTableTasks.getTableHeader().setFont(new Font("Segoe Ui", Font.BOLD, 14));
         TasksListJTableTasks.getTableHeader().setBackground(new Color(0,102,102));
         TasksListJTableTasks.getTableHeader().setForeground(new Color(255,255,255));
+        TasksListJTableTasks.getColumnModel().getColumn(2).setCellRenderer(
+                new DeadlineColumnCellRederer());
         //Created
         TasksListJTableTasks.setAutoCreateRowSorter(true);
     }
@@ -450,14 +458,15 @@ public class MainScrenn extends javax.swing.JFrame {
                
         if (!projectsModel.isEmpty()){
             JListProjects.setSelectedIndex(0);
-            Project project = (Project) projectsModel.get(0);
+            int projectIndex = JListProjects.getSelectedIndex();
+            Project project = (Project) projectsModel.get(projectIndex);
             loadTasks(project.getId());        
         }
     }
     public void loadTasks(int idProject){
         List<Task> tasks = TaskDAO.getByIdProject(idProject);
         taskModel.setTasks(tasks);
-        showTableTasks(!tasks.isEmpty());
+        showTableTasks(tasks.size()> 0);
     }
     public void loadProjects(){
         List<Project> projects = ProjectDAO.getAll();

@@ -2,17 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package main;
+package util;
 
-import util.ConnectionFactory;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
- * @author Lucas Silva Arruda Chagas
+ * @author User
  */
-public class main {
-    public static void main(String[]args){
-        ConnectionFactory.getConnection();
+public class ButtonColumnCellRender extends DefaultTableCellRenderer {
     
-    }
 }
