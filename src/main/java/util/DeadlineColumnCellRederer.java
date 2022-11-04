@@ -13,8 +13,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import model.Task;
 
 /**
- *
  * @author Lucas Silva Arruda Chagas
+ * Class util DeadLineColumnCellRender change deadline in table tasks
  */
 public class DeadlineColumnCellRederer extends DefaultTableCellRenderer {  
     

@@ -12,7 +12,6 @@ import util.ConnectionFactory;
  */
 public class main {
     public static void main(String[]args){
-        ConnectionFactory.getConnection();
-    
+            
     }
 }

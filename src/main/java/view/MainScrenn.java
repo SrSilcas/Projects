@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import model.Project;
 import model.Task;
+import util.ButtonColumnCellRender;
 import util.DeadlineColumnCellRederer;
 import util.TaskTableModel;
 
@@ -27,10 +28,10 @@ public final class MainScrenn extends javax.swing.JFrame {
     TaskTableModel taskModel;
     
     public MainScrenn() {
+       
         initComponents();
-        
         initComponntsModel();
-//        decorateTableTasks();
+        decorateTableTasks();
     }
 
     /**
@@ -442,12 +443,19 @@ public final class MainScrenn extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     public void decorateTableTasks(){
         //decor table TasksList
-        TasksListJTableTasks.getTableHeader().setFont(new Font("Segoe Ui", Font.BOLD, 14));
-        TasksListJTableTasks.getTableHeader().setBackground(new Color(0,102,102));
-        TasksListJTableTasks.getTableHeader().setForeground(new Color(255,255,255));
-        TasksListJTableTasks.getColumnModel().getColumn(2).setCellRenderer(
-                new DeadlineColumnCellRederer());
-        //Created
+        TasksListJTableTasks.getTableHeader().setFont(new Font("Segoe Ui",
+                Font.BOLD, 14));
+        TasksListJTableTasks.getTableHeader().setBackground(new Color(
+                0,102,102));
+        TasksListJTableTasks.getTableHeader().setForeground(new Color(
+                255,255,255));
+        TasksListJTableTasks.getColumnModel().getColumn(2)
+                .setCellRenderer(new DeadlineColumnCellRederer());
+        TasksListJTableTasks.getColumnModel().getColumn(4)
+                .setCellRenderer(new ButtonColumnCellRender("edit"));
+        TasksListJTableTasks.getColumnModel().getColumn(5)
+                .setCellRenderer(new ButtonColumnCellRender("delete"));
+       //Created
         TasksListJTableTasks.setAutoCreateRowSorter(true);
     }
     public void initComponntsModel(){
@@ -466,7 +474,7 @@ public final class MainScrenn extends javax.swing.JFrame {
     public void loadTasks(int idProject){
         List<Task> tasks = TaskDAO.getByIdProject(idProject);
         taskModel.setTasks(tasks);
-        showTableTasks(tasks.size()> 0);
+        showTableTasks(!tasks.isEmpty());
     }
     public void loadProjects(){
         List<Project> projects = ProjectDAO.getAll();
